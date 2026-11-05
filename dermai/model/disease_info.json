@@ -1,0 +1,883 @@
+{
+  "Acne & Rosacea": {
+    "description": "Acne is a chronic inflammatory skin condition causing pimples, blackheads, and cysts, primarily affecting hair follicles. Rosacea is a related condition causing facial redness and visible blood vessels.",
+    "causes": [
+      "Excess sebum production",
+      "Bacterial infection (P. acnes)",
+      "Hormonal changes",
+      "Clogged hair follicles",
+      "Genetic predisposition"
+    ],
+    "treatments": [
+      "Topical retinoids (tretinoin)",
+      "Benzoyl peroxide cleansers",
+      "Oral antibiotics for severe cases",
+      "Isotretinoin for cystic acne",
+      "Azelaic acid for rosacea"
+    ],
+    "medications": [
+      "Tretinoin",
+      "Benzoyl Peroxide",
+      "Doxycycline",
+      "Isotretinoin"
+    ],
+    "lifestyle": [
+      "Gentle face washing twice daily",
+      "Avoid touching face",
+      "Use non-comedogenic products",
+      "SPF 30+ sunscreen daily"
+    ],
+    "specialist": "Dermatologist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L70.0",
+    "prognosis": "Most cases improve significantly with proper treatment within 3-6 months.",
+    "red_flags": [
+      "Severe cystic nodules",
+      "Fever with skin infection",
+      "Rapid spreading redness"
+    ]
+  },
+  "Actinic Keratosis & Malignant Lesions": {
+    "description": "Actinic keratosis is a rough, scaly patch on the skin caused by years of sun exposure. It is considered a precancerous condition that may progress to squamous cell carcinoma.",
+    "causes": [
+      "Chronic UV radiation exposure",
+      "Fair skin type",
+      "Advanced age",
+      "Weakened immune system",
+      "History of sunburns"
+    ],
+    "treatments": [
+      "Cryotherapy (liquid nitrogen)",
+      "Topical fluorouracil (5-FU)",
+      "Photodynamic therapy",
+      "Imiquimod cream",
+      "Surgical excision for suspicious lesions"
+    ],
+    "medications": [
+      "5-Fluorouracil cream",
+      "Imiquimod",
+      "Diclofenac gel",
+      "Ingenol mebutate"
+    ],
+    "lifestyle": [
+      "Strict sun avoidance",
+      "Daily SPF 50+ sunscreen",
+      "Protective clothing and hats",
+      "Annual skin checks"
+    ],
+    "specialist": "Dermatologist / Oncologist",
+    "urgency": "soon",
+    "contagious": false,
+    "icd": "L57.0",
+    "prognosis": "With early treatment, progression to cancer is prevented in most cases.",
+    "red_flags": [
+      "Bleeding lesion",
+      "Rapid size increase",
+      "Ulceration",
+      "Multiple new lesions"
+    ]
+  },
+  "Atopic Dermatitis (Eczema)": {
+    "description": "Atopic dermatitis is a chronic, relapsing inflammatory skin disease characterized by intense itching, dry skin, and eczematous lesions. It often coexists with asthma and allergic rhinitis.",
+    "causes": [
+      "Genetic skin barrier defects",
+      "Immune system dysfunction",
+      "Environmental triggers",
+      "Allergens (dust mites, pollen)",
+      "Stress and sweating"
+    ],
+    "treatments": [
+      "Topical corticosteroids",
+      "Calcineurin inhibitors (tacrolimus)",
+      "Dupilumab (biologic therapy)",
+      "Antihistamines for itch",
+      "Wet wrap therapy for severe cases"
+    ],
+    "medications": [
+      "Hydrocortisone cream",
+      "Tacrolimus",
+      "Dupilumab",
+      "Cetirizine"
+    ],
+    "lifestyle": [
+      "Moisturize 2x daily",
+      "Lukewarm short showers",
+      "Avoid known triggers",
+      "Wear soft cotton clothing"
+    ],
+    "specialist": "Dermatologist / Allergist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L20.9",
+    "prognosis": "Chronic condition requiring long-term management; many children outgrow it by adulthood.",
+    "red_flags": [
+      "Signs of secondary bacterial infection",
+      "Eczema herpeticum",
+      "Failure to respond to treatment"
+    ]
+  },
+  "Bullous Disease": {
+    "description": "Bullous diseases are a group of disorders characterized by large fluid-filled blisters (bullae) on the skin or mucous membranes, often caused by autoimmune mechanisms.",
+    "causes": [
+      "Autoimmune antibody attack on skin proteins",
+      "Drug reactions",
+      "Genetic mutations",
+      "Infections triggering immune response"
+    ],
+    "treatments": [
+      "High-dose systemic corticosteroids",
+      "Immunosuppressants (azathioprine)",
+      "Rituximab for refractory cases",
+      "Wound care and blister management"
+    ],
+    "medications": [
+      "Prednisone",
+      "Azathioprine",
+      "Mycophenolate mofetil",
+      "Rituximab"
+    ],
+    "lifestyle": [
+      "Avoid skin trauma",
+      "Gentle cleansing of affected areas",
+      "Protect open areas from infection"
+    ],
+    "specialist": "Dermatologist",
+    "urgency": "urgent",
+    "contagious": false,
+    "icd": "L13.9",
+    "prognosis": "Requires ongoing management; remission achievable with immunosuppressive therapy.",
+    "red_flags": [
+      "Widespread blistering",
+      "Involvement of mucous membranes",
+      "Signs of sepsis"
+    ]
+  },
+  "Cellulitis & Bacterial Infections": {
+    "description": "Cellulitis is an acute bacterial skin infection causing redness, swelling, warmth, and pain, typically caused by Streptococcus or Staphylococcus bacteria entering through skin breaks.",
+    "causes": [
+      "Bacterial entry through cuts or wounds",
+      "Insect bites",
+      "Athlete's foot creating entry points",
+      "Weakened immune system",
+      "Lymphedema"
+    ],
+    "treatments": [
+      "Oral antibiotics (cephalexin, clindamycin)",
+      "IV antibiotics for severe cases",
+      "Elevation of affected limb",
+      "Wound care",
+      "Hospitalization if systemic symptoms"
+    ],
+    "medications": [
+      "Cephalexin",
+      "Clindamycin",
+      "Dicloxacillin",
+      "Amoxicillin-Clavulanate"
+    ],
+    "lifestyle": [
+      "Clean and cover all cuts",
+      "Moisturize skin to prevent cracks",
+      "Treat athlete's foot promptly",
+      "Control blood sugar if diabetic"
+    ],
+    "specialist": "Dermatologist / Infectious Disease",
+    "urgency": "urgent",
+    "contagious": false,
+    "icd": "L03.90",
+    "prognosis": "Most cases resolve within 7-14 days with appropriate antibiotics.",
+    "red_flags": [
+      "Red streaks spreading from wound",
+      "High fever and chills",
+      "Rapidly expanding redness",
+      "Pus or abscess formation"
+    ]
+  },
+  "Eczema": {
+    "description": "Eczema is an umbrella term for inflammatory skin conditions causing itchy, red, dry, and cracked skin. It includes several types such as contact, nummular, and dyshidrotic eczema.",
+    "causes": [
+      "Immune system overreaction",
+      "Skin barrier dysfunction",
+      "Contact with irritants",
+      "Allergen exposure",
+      "Environmental factors"
+    ],
+    "treatments": [
+      "Moisturizers and emollients",
+      "Topical corticosteroids",
+      "Avoiding triggers",
+      "Antihistamines",
+      "Light therapy (phototherapy)"
+    ],
+    "medications": [
+      "Betamethasone cream",
+      "Hydrocortisone",
+      "Diphenhydramine",
+      "Crisaborole"
+    ],
+    "lifestyle": [
+      "Apply moisturizer immediately after bathing",
+      "Identify and avoid triggers",
+      "Use fragrance-free products",
+      "Manage stress"
+    ],
+    "specialist": "Dermatologist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L30.9",
+    "prognosis": "Manageable with proper skin care and trigger avoidance; flares reduce over time.",
+    "red_flags": [
+      "Infected eczema (crusting, oozing pus)",
+      "Widespread severe flares",
+      "Eye involvement"
+    ]
+  },
+  "Exanthems & Drug Eruptions": {
+    "description": "Drug eruptions are adverse skin reactions to medications, ranging from mild maculopapular rashes to life-threatening conditions like Stevens-Johnson syndrome.",
+    "causes": [
+      "Allergic reaction to medications",
+      "Viral infections (measles, rubella)",
+      "Immune complex deposition",
+      "Direct drug toxicity"
+    ],
+    "treatments": [
+      "Immediate discontinuation of causative drug",
+      "Antihistamines for mild reactions",
+      "Systemic corticosteroids",
+      "Hospitalization for severe reactions",
+      "Supportive care"
+    ],
+    "medications": [
+      "Cetirizine",
+      "Prednisone",
+      "Diphenhydramine",
+      "Cyclosporine (for SJS/TEN)"
+    ],
+    "lifestyle": [
+      "Document all drug allergies",
+      "Wear medical alert bracelet",
+      "Avoid re-exposure to causative agent"
+    ],
+    "specialist": "Dermatologist / Allergist",
+    "urgency": "soon",
+    "contagious": false,
+    "icd": "L27.0",
+    "prognosis": "Most mild eruptions resolve within 2 weeks of stopping the drug.",
+    "red_flags": [
+      "Blistering or skin peeling",
+      "Mucosal involvement",
+      "Fever and systemic symptoms",
+      "Rapidly spreading rash"
+    ]
+  },
+  "Hair Loss & Alopecia": {
+    "description": "Alopecia encompasses various types of hair loss, from androgenetic alopecia (pattern baldness) to autoimmune alopecia areata causing patchy hair loss.",
+    "causes": [
+      "Genetic factors",
+      "Autoimmune conditions",
+      "Hormonal changes",
+      "Nutritional deficiencies",
+      "Physical or emotional stress"
+    ],
+    "treatments": [
+      "Minoxidil (topical)",
+      "Finasteride (oral, male pattern)",
+      "Corticosteroid injections for alopecia areata",
+      "Platelet-rich plasma therapy",
+      "Hair transplantation"
+    ],
+    "medications": [
+      "Minoxidil",
+      "Finasteride",
+      "Triamcinolone acetonide",
+      "Baricitinib (JAK inhibitor)"
+    ],
+    "lifestyle": [
+      "Gentle hair care practices",
+      "Balanced diet with adequate protein",
+      "Manage stress",
+      "Avoid tight hairstyles"
+    ],
+    "specialist": "Dermatologist / Trichologist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L65.9",
+    "prognosis": "Androgenetic alopecia is progressive; autoimmune types can regrow spontaneously or with treatment.",
+    "red_flags": [
+      "Sudden severe hair loss",
+      "Associated with fatigue or weight changes",
+      "Scarring alopecia"
+    ]
+  },
+  "Herpes HPV & STDs": {
+    "description": "Herpes simplex causes recurrent oral and genital sores. HPV causes warts and is linked to cancers. These are sexually transmitted infections with dermatological manifestations.",
+    "causes": [
+      "Herpes Simplex Virus 1 & 2",
+      "Human Papillomavirus (HPV)",
+      "Sexual or close skin-to-skin contact",
+      "Vertical transmission (mother to child)"
+    ],
+    "treatments": [
+      "Antiviral medications (acyclovir, valacyclovir)",
+      "HPV vaccination",
+      "Topical treatments for warts",
+      "Partner notification and safe sex practices"
+    ],
+    "medications": [
+      "Acyclovir",
+      "Valacyclovir",
+      "Famciclovir",
+      "Imiquimod (HPV warts)"
+    ],
+    "lifestyle": [
+      "Practice safe sex",
+      "Avoid contact during outbreaks",
+      "Get HPV vaccine if eligible",
+      "Regular STI screening"
+    ],
+    "specialist": "Dermatologist / Infectious Disease",
+    "urgency": "soon",
+    "contagious": true,
+    "icd": "A60.0",
+    "prognosis": "Herpes is manageable with antivirals; most HPV infections clear within 2 years.",
+    "red_flags": [
+      "Lesions spreading to eyes",
+      "Neonatal herpes",
+      "Multiple simultaneous STIs"
+    ]
+  },
+  "Light Diseases & Pigmentation": {
+    "description": "These conditions involve abnormal skin pigmentation, including hyperpigmentation (melasma, PIH) and hypopigmentation (vitiligo, pityriasis alba), often triggered by sun exposure or inflammation.",
+    "causes": [
+      "UV radiation exposure",
+      "Hormonal changes",
+      "Post-inflammatory response",
+      "Autoimmune destruction of melanocytes (vitiligo)",
+      "Medications"
+    ],
+    "treatments": [
+      "Topical hydroquinone for hyperpigmentation",
+      "Azelaic acid",
+      "Chemical peels",
+      "Laser therapy",
+      "Phototherapy for vitiligo"
+    ],
+    "medications": [
+      "Hydroquinone",
+      "Kojic acid",
+      "Tranexamic acid",
+      "Tacrolimus (vitiligo)"
+    ],
+    "lifestyle": [
+      "Daily SPF 50+ sunscreen",
+      "Avoid sun during peak hours",
+      "Vitamin D supplementation",
+      "Camouflage cosmetics for vitiligo"
+    ],
+    "specialist": "Dermatologist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L81.9",
+    "prognosis": "Treatable but requires long-term maintenance; vitiligo may be permanent.",
+    "red_flags": [
+      "Rapidly spreading depigmentation",
+      "Associated with other autoimmune symptoms"
+    ]
+  },
+  "Lupus & Connective Tissue": {
+    "description": "Cutaneous lupus erythematosus causes skin inflammation ranging from a butterfly-shaped facial rash to discoid lesions that can cause permanent scarring.",
+    "causes": [
+      "Autoimmune dysfunction",
+      "Genetic predisposition",
+      "UV light triggering flares",
+      "Hormonal factors",
+      "Certain medications"
+    ],
+    "treatments": [
+      "Antimalarials (hydroxychloroquine)",
+      "Topical corticosteroids",
+      "Sunscreen and sun avoidance",
+      "Systemic immunosuppressants for severe cases"
+    ],
+    "medications": [
+      "Hydroxychloroquine",
+      "Prednisone",
+      "Methotrexate",
+      "Belimumab"
+    ],
+    "lifestyle": [
+      "Strict sun protection (SPF 50+)",
+      "Manage stress",
+      "Regular rheumatology follow-up",
+      "Adequate rest"
+    ],
+    "specialist": "Dermatologist / Rheumatologist",
+    "urgency": "soon",
+    "contagious": false,
+    "icd": "L93.0",
+    "prognosis": "Cutaneous lupus is controllable; systemic involvement requires monitoring.",
+    "red_flags": [
+      "Kidney symptoms",
+      "Joint pain and fatigue",
+      "Severe flare with fever",
+      "Neurological changes"
+    ]
+  },
+  "Melanoma Skin Cancer": {
+    "description": "Melanoma is the most dangerous form of skin cancer, arising from melanocytes. It can spread rapidly to other organs if not detected early. ABCDE criteria are critical for early identification.",
+    "causes": [
+      "UV radiation (sun and tanning beds)",
+      "Fair skin and light features",
+      "Multiple or atypical moles",
+      "Family history of melanoma",
+      "Weakened immune system"
+    ],
+    "treatments": [
+      "Surgical excision with clear margins",
+      "Immunotherapy (pembrolizumab, nivolumab)",
+      "Targeted therapy (BRAF/MEK inhibitors)",
+      "Radiation therapy",
+      "Sentinel lymph node biopsy"
+    ],
+    "medications": [
+      "Pembrolizumab",
+      "Nivolumab",
+      "Dabrafenib + Trametinib",
+      "Ipilimumab"
+    ],
+    "lifestyle": [
+      "Annual full-body skin checks",
+      "Monthly self-examination",
+      "SPF 50+ every day",
+      "Avoid tanning beds entirely"
+    ],
+    "specialist": "Dermatologist / Oncologist - URGENT",
+    "urgency": "urgent",
+    "contagious": false,
+    "icd": "C43.9",
+    "prognosis": "Stage I melanoma has >95% 5-year survival; early detection is critical.",
+    "red_flags": [
+      "Asymmetry in mole shape",
+      "Irregular border",
+      "Multiple colors in one lesion",
+      "Diameter >6mm",
+      "Evolving size or shape"
+    ]
+  },
+  "Nail Fungus & Nail Disease": {
+    "description": "Onychomycosis (nail fungus) causes thickened, discolored, brittle nails. Other nail diseases include psoriatic nail changes and paronychia (nail fold infection).",
+    "causes": [
+      "Dermatophyte fungi (Trichophyton)",
+      "Warm moist environments",
+      "Shared nail tools",
+      "Walking barefoot in public places",
+      "Reduced circulation"
+    ],
+    "treatments": [
+      "Oral antifungals (terbinafine)",
+      "Topical antifungals (ciclopirox)",
+      "Nail avulsion in severe cases",
+      "Laser treatment",
+      "Long treatment course (3-6 months)"
+    ],
+    "medications": [
+      "Terbinafine",
+      "Itraconazole",
+      "Ciclopirox lacquer",
+      "Fluconazole"
+    ],
+    "lifestyle": [
+      "Keep nails short and dry",
+      "Wear moisture-wicking socks",
+      "Use sandals in public showers",
+      "Disinfect nail tools"
+    ],
+    "specialist": "Dermatologist / Podiatrist",
+    "urgency": "routine",
+    "contagious": true,
+    "icd": "B35.1",
+    "prognosis": "Cure rates 70-80% with oral antifungals; recurrence is common.",
+    "red_flags": [
+      "Spreading to multiple nails rapidly",
+      "Painful nail destruction",
+      "Diabetic patients with nail changes"
+    ]
+  },
+  "Poison Ivy & Contact Dermatitis": {
+    "description": "Contact dermatitis is an inflammatory skin reaction from direct contact with an irritant or allergen. Poison ivy causes an intensely itchy, blistering rash from urushiol exposure.",
+    "causes": [
+      "Urushiol in poison ivy/oak/sumac",
+      "Nickel in jewelry",
+      "Latex allergies",
+      "Chemical irritants",
+      "Fragrances and preservatives in cosmetics"
+    ],
+    "treatments": [
+      "Wash exposed area immediately with soap",
+      "Topical calamine lotion",
+      "Hydrocortisone cream",
+      "Oral corticosteroids for severe cases",
+      "Cool compresses for relief"
+    ],
+    "medications": [
+      "Calamine lotion",
+      "Hydrocortisone",
+      "Prednisone (severe)",
+      "Diphenhydramine"
+    ],
+    "lifestyle": [
+      "Learn to identify and avoid poison ivy",
+      "Wear gloves for outdoor activities",
+      "Identify and avoid allergens",
+      "Use hypoallergenic products"
+    ],
+    "specialist": "Dermatologist / Allergist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L23.7",
+    "prognosis": "Most cases resolve within 2-3 weeks without complications.",
+    "red_flags": [
+      "Facial or eye involvement",
+      "Rash near mouth (possible ingestion)",
+      "Difficulty breathing after exposure"
+    ]
+  },
+  "Psoriasis & Lichen Planus": {
+    "description": "Psoriasis is a chronic autoimmune condition causing rapid skin cell buildup, resulting in scales and red patches. Lichen planus causes itchy, flat-topped purple bumps.",
+    "causes": [
+      "Autoimmune T-cell dysfunction",
+      "Genetic predisposition",
+      "Triggers: stress, infections, medications",
+      "Smoking and alcohol",
+      "Unknown trigger for lichen planus"
+    ],
+    "treatments": [
+      "Topical corticosteroids",
+      "Vitamin D analogues (calcipotriol)",
+      "Biologics (adalimumab, secukinumab)",
+      "Phototherapy (UVB)",
+      "Methotrexate for severe psoriasis"
+    ],
+    "medications": [
+      "Calcipotriol",
+      "Betamethasone",
+      "Methotrexate",
+      "Adalimumab",
+      "Secukinumab"
+    ],
+    "lifestyle": [
+      "Moisturize daily",
+      "Avoid known triggers",
+      "Limit alcohol",
+      "Stress management techniques",
+      "Weight management"
+    ],
+    "specialist": "Dermatologist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L40.0",
+    "prognosis": "Chronic condition with periods of remission; modern biologics provide excellent control.",
+    "red_flags": [
+      "Psoriatic erythroderma (whole body redness)",
+      "Pustular psoriasis",
+      "Associated joint pain (psoriatic arthritis)"
+    ]
+  },
+  "Scabies Lyme & Parasitic Infections": {
+    "description": "Scabies is caused by the Sarcoptes scabiei mite burrowing into skin, causing intense itching. Lyme disease rash (erythema migrans) appears as a bull's-eye pattern after a tick bite.",
+    "causes": [
+      "Sarcoptes scabiei mite (scabies)",
+      "Borrelia burgdorferi bacteria via tick bite (Lyme)",
+      "Close skin-to-skin contact (scabies)",
+      "Outdoor tick exposure (Lyme)"
+    ],
+    "treatments": [
+      "Permethrin 5% cream for scabies",
+      "Oral ivermectin for crusted scabies",
+      "Doxycycline for Lyme disease",
+      "Treat all household contacts simultaneously",
+      "Wash all bedding and clothing"
+    ],
+    "medications": [
+      "Permethrin 5%",
+      "Ivermectin",
+      "Doxycycline",
+      "Amoxicillin"
+    ],
+    "lifestyle": [
+      "Avoid close contact during treatment",
+      "Wash all clothes/bedding at 60C",
+      "Wear tick-repellent when outdoors",
+      "Tick checks after outdoor activities"
+    ],
+    "specialist": "Dermatologist / Infectious Disease",
+    "urgency": "soon",
+    "contagious": true,
+    "icd": "B86",
+    "prognosis": "Scabies resolves with single treatment; early Lyme cures with antibiotics.",
+    "red_flags": [
+      "Bull's eye rash after tick bite - seek care immediately",
+      "Joint pain with rash",
+      "Neurological symptoms in Lyme"
+    ]
+  },
+  "Seborrheic Keratosis": {
+    "description": "Seborrheic keratoses are benign, non-cancerous growths that appear as waxy, wart-like, stuck-on-looking brown or black spots. They are extremely common in older adults.",
+    "causes": [
+      "Aging process (most common cause)",
+      "Genetic predisposition",
+      "Sun exposure (partial contributor)",
+      "Unknown hormonal factors"
+    ],
+    "treatments": [
+      "No treatment required (benign)",
+      "Cryotherapy if desired removal",
+      "Curettage (scraping)",
+      "Laser removal",
+      "Electrosurgery"
+    ],
+    "medications": [
+      "No medication required",
+      "Hydrogen peroxide 40% (Eskata) - prescription"
+    ],
+    "lifestyle": [
+      "Monitor for any changes in appearance",
+      "Protect from sun damage",
+      "Do not scratch or pick lesions"
+    ],
+    "specialist": "Dermatologist (for confirmation)",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L82.1",
+    "prognosis": "Completely benign; no risk of progression to cancer.",
+    "red_flags": [
+      "Sudden appearance of many seborrheic keratoses (Leser-Trelat sign)",
+      "Lesion that bleeds or changes rapidly"
+    ]
+  },
+  "Skin Tags": {
+    "description": "Skin tags (acrochordons) are small, soft, flesh-colored benign growths that hang off the skin on a thin stalk. They are harmless and very common.",
+    "causes": [
+      "Skin friction in folds",
+      "Obesity",
+      "Hormonal changes (pregnancy)",
+      "Aging",
+      "Insulin resistance / diabetes"
+    ],
+    "treatments": [
+      "No treatment required (benign)",
+      "Cryotherapy",
+      "Surgical snip removal",
+      "Electrosurgery",
+      "Ligation (tying off blood supply)"
+    ],
+    "medications": [
+      "None required"
+    ],
+    "lifestyle": [
+      "Weight management reduces new formation",
+      "Loose-fitting clothing reduces friction",
+      "Blood sugar control if diabetic"
+    ],
+    "specialist": "Dermatologist (optional)",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L91.8",
+    "prognosis": "Entirely benign; removal is cosmetic.",
+    "red_flags": [
+      "Rapid size increase",
+      "Color change to dark purple or black",
+      "Pain or bleeding without trauma"
+    ]
+  },
+  "Tinea Ringworm & Fungal Infections": {
+    "description": "Tinea infections are superficial fungal infections of skin, hair, and nails. They include ringworm (tinea corporis), athlete's foot (tinea pedis), and jock itch (tinea cruris).",
+    "causes": [
+      "Dermatophyte fungi",
+      "Close contact with infected person or animal",
+      "Warm, moist environments",
+      "Sharing personal items (towels, combs)",
+      "Weakened immunity"
+    ],
+    "treatments": [
+      "Topical antifungals (clotrimazole, miconazole)",
+      "Oral antifungals for extensive or scalp infections",
+      "Keep area clean and dry",
+      "Treat household contacts if necessary"
+    ],
+    "medications": [
+      "Clotrimazole",
+      "Terbinafine",
+      "Griseofulvin (scalp tinea)",
+      "Fluconazole"
+    ],
+    "lifestyle": [
+      "Keep skin dry",
+      "Wear moisture-wicking fabrics",
+      "Don't share personal items",
+      "Treat pets with ringworm"
+    ],
+    "specialist": "Dermatologist",
+    "urgency": "routine",
+    "contagious": true,
+    "icd": "B35.4",
+    "prognosis": "Resolves with antifungal treatment within 2-4 weeks.",
+    "red_flags": [
+      "Scalp involvement (tinea capitis)",
+      "Widespread infection",
+      "Failure to respond to topical treatment after 4 weeks"
+    ]
+  },
+  "Urticaria (Hives)": {
+    "description": "Urticaria presents as raised, itchy welts (wheals) on the skin, often caused by allergic reactions. Chronic urticaria lasts more than 6 weeks and may be autoimmune.",
+    "causes": [
+      "Allergic reaction (foods, medications, insect stings)",
+      "Infections",
+      "Physical triggers (cold, pressure, exercise)",
+      "Autoimmune mechanisms",
+      "Idiopathic (50% of chronic cases)"
+    ],
+    "treatments": [
+      "Non-sedating antihistamines (cetirizine, fexofenadine)",
+      "Omalizumab (biologic) for chronic urticaria",
+      "Epinephrine for anaphylaxis",
+      "Identify and avoid triggers",
+      "Systemic corticosteroids for acute severe cases"
+    ],
+    "medications": [
+      "Cetirizine",
+      "Fexofenadine",
+      "Loratadine",
+      "Omalizumab",
+      "Epinephrine (EpiPen)"
+    ],
+    "lifestyle": [
+      "Keep an allergy diary",
+      "Avoid known triggers",
+      "Wear loose comfortable clothing",
+      "Manage stress"
+    ],
+    "specialist": "Dermatologist / Allergist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "L50.9",
+    "prognosis": "Acute urticaria resolves within weeks; chronic form may persist years but is controllable.",
+    "red_flags": [
+      "Throat swelling or breathing difficulty (anaphylaxis)",
+      "Facial swelling (angioedema)",
+      "Hives with dizziness or low blood pressure"
+    ]
+  },
+  "Vascular Tumors": {
+    "description": "Vascular tumors include hemangiomas (benign blood vessel growths), port-wine stains, and rare malignant angiosarcomas. Most are benign and present at birth or early childhood.",
+    "causes": [
+      "Abnormal blood vessel development",
+      "Genetic mutations",
+      "Sun damage (angiosarcoma)",
+      "Radiation exposure (rare)"
+    ],
+    "treatments": [
+      "Propranolol for infantile hemangiomas",
+      "Laser therapy for port-wine stains",
+      "Surgical excision if necessary",
+      "Observation for involuting hemangiomas"
+    ],
+    "medications": [
+      "Propranolol",
+      "Timolol (topical)",
+      "Vincristine (malignant vascular tumors)"
+    ],
+    "lifestyle": [
+      "Monitor for size or color changes",
+      "Sun protection for at-risk skin"
+    ],
+    "specialist": "Dermatologist / Pediatric Dermatologist",
+    "urgency": "routine",
+    "contagious": false,
+    "icd": "D18.01",
+    "prognosis": "Most infantile hemangiomas involute by age 10. Malignant types require prompt treatment.",
+    "red_flags": [
+      "Rapidly growing vascular lesion in adult",
+      "Bleeding or ulceration",
+      "Association with systemic symptoms"
+    ]
+  },
+  "Vasculitis": {
+    "description": "Cutaneous vasculitis is inflammation of blood vessel walls in the skin, causing palpable purpura, ulcers, and nodules. It may be associated with systemic vasculitis.",
+    "causes": [
+      "Autoimmune conditions (lupus, rheumatoid arthritis)",
+      "Infections (hepatitis B/C)",
+      "Drug reactions",
+      "IgA deposits (Henoch-Schonlein purpura)",
+      "Idiopathic"
+    ],
+    "treatments": [
+      "Treat underlying cause",
+      "Corticosteroids",
+      "Colchicine for mild cases",
+      "Immunosuppressants for systemic disease",
+      "Wound care for ulcers"
+    ],
+    "medications": [
+      "Prednisone",
+      "Colchicine",
+      "Dapsone",
+      "Rituximab"
+    ],
+    "lifestyle": [
+      "Avoid known triggers",
+      "Elevate affected limbs",
+      "Compression stockings",
+      "Monitor for systemic involvement"
+    ],
+    "specialist": "Dermatologist / Rheumatologist",
+    "urgency": "soon",
+    "contagious": false,
+    "icd": "L95.9",
+    "prognosis": "Isolated cutaneous vasculitis has good prognosis; systemic involvement requires careful monitoring.",
+    "red_flags": [
+      "Kidney involvement (blood in urine)",
+      "Joint pain and abdominal pain",
+      "Spreading necrotic ulcers"
+    ]
+  },
+  "Warts & Molluscum": {
+    "description": "Warts are caused by HPV and appear as rough growths on the skin. Molluscum contagiosum is a viral infection causing small, dome-shaped papules with a central dimple.",
+    "causes": [
+      "Human papillomavirus (HPV) - warts",
+      "Molluscum contagiosum virus (poxvirus)",
+      "Direct skin-to-skin contact",
+      "Shared towels or surfaces",
+      "Weakened immune system"
+    ],
+    "treatments": [
+      "Salicylic acid (warts)",
+      "Cryotherapy",
+      "Cantharidin for molluscum",
+      "Laser treatment",
+      "Imiquimod cream for recalcitrant warts"
+    ],
+    "medications": [
+      "Salicylic acid",
+      "Cantharidin",
+      "Imiquimod",
+      "Trichloroacetic acid"
+    ],
+    "lifestyle": [
+      "Don't pick or scratch lesions",
+      "Avoid sharing personal items",
+      "Practice good hand hygiene",
+      "Boost immune system with healthy lifestyle"
+    ],
+    "specialist": "Dermatologist",
+    "urgency": "routine",
+    "contagious": true,
+    "icd": "B07.9",
+    "prognosis": "Most warts resolve within 1-2 years without treatment; molluscum resolves within 18 months.",
+    "red_flags": [
+      "Warts spreading rapidly",
+      "Warts on face or genitals",
+      "Immunocompromised patients with widespread infection"
+    ]
+  }
+}

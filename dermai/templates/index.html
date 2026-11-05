@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DermAI Pro — Skin Disease Prediction</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#05080b;
+  --s1:#0a1018;
+  --s2:#0e1822;
+  --s3:#13202e;
+  --acc:#00d4ff;
+  --acc2:#00ffb3;
+  --accD:rgba(0,212,255,.12);
+  --txt:#ddeef8;
+  --txt2:#6a9ab0;
+  --txt3:#2e4d60;
+  --bdr:#172434;
+  --bdr2:#1d3349;
+  --danger:#ff5370;
+  --warn:#ffc947;
+  --ok:#00d68f;
+  --r:13px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--txt);
+  font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;
+}
+
+/* ── AMBIENT BG ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 5% 15%, rgba(0,212,255,.055) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 95% 85%, rgba(0,255,179,.04) 0%, transparent 65%),
+    linear-gradient(rgba(0,212,255,.018) 1px,transparent 1px) 0 0/48px 48px,
+    linear-gradient(90deg,rgba(0,212,255,.018) 1px,transparent 1px) 0 0/48px 48px;
+}
+
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
+
+/* ══ HEADER ══════════════════════════════════════════════════ */
+.header{
+  position:sticky;top:0;z-index:200;
+  background:rgba(5,8,11,.9);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--bdr2);
+  height:64px;display:flex;align-items:center;padding:0 28px;gap:16px;
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{
+  width:40px;height:40px;border-radius:11px;
+  background:linear-gradient(145deg,#001525,#003348);
+  border:1px solid rgba(0,212,255,.35);
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  box-shadow:0 0 20px rgba(0,212,255,.15),inset 0 1px 0 rgba(255,255,255,.05);
+}
+.logo-text{line-height:1}
+.logo-name{font-size:19px;font-weight:800;letter-spacing:-.5px;color:var(--txt)}
+.logo-name span{color:var(--acc)}
+.logo-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--txt3);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+
+.header-badges{margin-left:auto;display:flex;align-items:center;gap:10px}
+.badge-pill{
+  display:flex;align-items:center;gap:7px;border-radius:20px;
+  padding:5px 13px;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  background:var(--s2);border:1px solid var(--bdr2);color:var(--txt2);
+  transition:all .3s;
+}
+#modelPill.ready{border-color:rgba(0,214,143,.4);background:rgba(0,214,143,.07);color:#4eeaaa}
+#modelPill.err{border-color:rgba(255,83,112,.4);background:rgba(255,83,112,.07);color:#ff8096}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--warn);transition:background .4s;flex-shrink:0}
+.dot.ready{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.dot.err{background:var(--danger)}
+.ver{background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.2);
+     border-radius:20px;padding:5px 11px;font-family:'JetBrains Mono',monospace;
+     font-size:10px;color:var(--acc);letter-spacing:.5px}
+
+/* ══ TWO-COLUMN LAYOUT ═══════════════════════════════════════ */
+.main{display:grid;grid-template-columns:400px 1fr;flex:1;min-height:calc(100vh - 64px)}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+
+/* ══ LEFT PANEL ══════════════════════════════════════════════ */
+.lp{
+  background:var(--s1);border-right:1px solid var(--bdr2);
+  display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;
+}
+.lp::-webkit-scrollbar{width:3px}
+.lp::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px}
+
+.sec{padding:20px 22px;border-bottom:1px solid var(--bdr)}
+.sec-lbl{
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--txt3);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.sec-lbl::before{content:'';width:16px;height:1px;background:var(--acc);opacity:.45}
+.sec-lbl span{color:var(--acc);opacity:.7}
+
+/* DROPZONE */
+.dropzone{
+  border:1.5px dashed var(--bdr2);border-radius:var(--r);
+  padding:36px 18px;text-align:center;cursor:pointer;
+  background:var(--s2);transition:all .22s;position:relative;overflow:hidden;
+}
+.dropzone::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 55% at 50% 115%,rgba(0,212,255,.07),transparent);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.dropzone:hover::after,.dropzone.over::after{opacity:1}
+.dropzone:hover,.dropzone.over{border-color:var(--acc);background:#080f18}
+.dropzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.dz-icon{font-size:36px;margin-bottom:10px;display:block;filter:grayscale(.4);transition:filter .2s}
+.dropzone:hover .dz-icon{filter:none}
+.dz-title{font-size:13.5px;font-weight:600;color:var(--txt);margin-bottom:4px}
+.dz-sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--txt3)}
+
+/* PREVIEW */
+.preview{display:none;position:relative;margin-top:13px}
+.preview.vis{display:block}
+.prev-img{width:100%;height:200px;object-fit:cover;border-radius:10px;
+           border:1px solid var(--bdr2);display:block}
+.prev-badge{
+  position:absolute;bottom:8px;left:8px;
+  background:rgba(5,8,11,.88);backdrop-filter:blur(8px);
+  border:1px solid var(--bdr2);border-radius:6px;
+  padding:3px 9px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--txt2);
+}
+.prev-rm{
+  position:absolute;top:8px;right:8px;
+  background:rgba(5,8,11,.88);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,83,112,.3);border-radius:6px;
+  padding:3px 10px;font-size:11px;color:var(--danger);cursor:pointer;transition:background .2s;
+}
+.prev-rm:hover{background:rgba(255,83,112,.12)}
+
+/* FORM */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--txt3);letter-spacing:.8px;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{
+  background:var(--s2);border:1px solid var(--bdr2);border-radius:9px;
+  padding:9px 12px;color:var(--txt);font-size:13px;font-family:'Syne',sans-serif;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:var(--acc);box-shadow:0 0 0 3px rgba(0,212,255,.08);
+}
+.fg select option{background:var(--s2)}
+.fg textarea{resize:vertical;min-height:68px}
+.full{grid-column:1/-1}
+
+/* SYMPTOMS */
+.syms{display:flex;flex-wrap:wrap;gap:6px}
+.sym{
+  padding:4px 11px;border:1px solid var(--bdr2);border-radius:20px;
+  font-size:11px;color:var(--txt2);cursor:pointer;transition:all .15s;
+  background:var(--s2);user-select:none;
+}
+.sym:hover{border-color:var(--acc);color:var(--acc)}
+.sym.on{background:rgba(0,212,255,.1);border-color:var(--acc);color:var(--acc)}
+
+/* ANALYZE BUTTON */
+.analyze-btn{
+  margin:18px 22px 22px;
+  background:linear-gradient(135deg,var(--acc),#00b8db);
+  border:none;border-radius:11px;padding:15px;
+  color:#001a22;font-size:14px;font-weight:700;font-family:'Syne',sans-serif;
+  cursor:pointer;transition:all .22s;letter-spacing:.3px;
+  box-shadow:0 4px 24px rgba(0,212,255,.25);
+  width:calc(100% - 44px);
+}
+.analyze-btn:hover{background:linear-gradient(135deg,#1ae0ff,#00ccee);
+                   transform:translateY(-1px);box-shadow:0 6px 30px rgba(0,212,255,.35)}
+.analyze-btn:active{transform:translateY(0)}
+.analyze-btn:disabled{background:var(--s3);color:var(--txt3);
+                       box-shadow:none;cursor:not-allowed;transform:none}
+
+/* ══ RIGHT PANEL ═════════════════════════════════════════════ */
+.rp{
+  background:var(--bg);overflow-y:auto;padding:24px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.rp::-webkit-scrollbar{width:3px}
+.rp::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px}
+
+/* EMPTY STATE */
+.empty{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;gap:14px;color:var(--txt3);padding:40px;
+}
+.empty-icon{font-size:52px;opacity:.35}
+.empty-title{font-family:'Lora',serif;font-size:24px;font-weight:400;font-style:italic;color:var(--txt2)}
+.empty-desc{font-size:13px;line-height:1.7;max-width:340px;color:var(--txt3)}
+.empty-chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.empty-chip{
+  padding:7px 14px;background:var(--s1);border:1px solid var(--bdr);
+  border-radius:8px;font-size:11.5px;color:var(--txt3);
+}
+
+/* LOADING */
+.loading{display:none;flex-direction:column;align-items:center;justify-content:center;
+          flex:1;gap:20px;padding:40px}
+.loading.act{display:flex}
+.spin-ring{width:64px;height:64px;position:relative}
+.spin-ring svg{animation:spin 1.5s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.load-title{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--acc);letter-spacing:2px}
+.load-steps{display:flex;flex-direction:column;gap:8px;min-width:240px}
+.step{
+  display:flex;align-items:center;gap:10px;font-size:12px;
+  color:var(--txt3);font-family:'JetBrains Mono',monospace;transition:color .3s;
+}
+.step.act{color:var(--acc)}
+.step.done{color:var(--ok)}
+.step-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* RESULTS */
+.results{display:none;flex-direction:column;gap:18px}
+.results.act{display:flex}
+
+/* result header card */
+.rh{
+  background:var(--s1);border:1px solid var(--bdr2);border-radius:var(--r);
+  padding:22px 24px;display:flex;align-items:flex-start;gap:18px;
+  position:relative;overflow:hidden;
+}
+.rh::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--acc),var(--acc2));
+}
+.sev-orb{
+  width:56px;height:56px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-family:'Lora',serif;
+}
+.sev-low{background:#0d2e0d;border:2px solid #2a7a2a;color:#5ecf5e}
+.sev-med{background:#2e1e08;border:2px solid #8a6020;color:#dfa84a}
+.sev-hi{background:#2e0d0d;border:2px solid #7a2a2a;color:#cf5e5e}
+.rh-main{flex:1;min-width:0}
+.rh-name{font-family:'Lora',serif;font-size:22px;font-weight:600;color:var(--acc2);margin-bottom:3px;word-break:break-word}
+.rh-sci{font-style:italic;font-size:12px;color:var(--txt3);margin-bottom:8px;font-family:'Lora',serif}
+.conf-row{display:flex;align-items:center;gap:10px}
+.conf-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--txt3)}
+.conf-track{flex:1;height:5px;background:var(--s3);border-radius:3px;overflow:hidden}
+.conf-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--acc),var(--acc2));
+           width:0%;transition:width 1.2s cubic-bezier(.22,.68,0,1.2)}
+.conf-val{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--acc);min-width:36px}
+.rh-badges{display:flex;flex-direction:column;gap:6px;align-items:flex-end;flex-shrink:0}
+
+/* cards */
+.card{background:var(--s1);border:1px solid var(--bdr2);border-radius:var(--r);padding:20px 22px}
+.card h3{font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--acc2);margin-bottom:13px}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mini-card{background:var(--s2);border:1px solid var(--bdr);border-radius:10px;padding:14px}
+.mini-lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--txt3);
+           letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.mini-val{font-size:13.5px;color:var(--txt);line-height:1.55}
+.desc{font-size:13px;color:var(--txt2);line-height:1.8;font-family:'Lora',serif;font-style:italic}
+.tag-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
+
+/* badges */
+.tag{padding:3px 10px;border-radius:20px;font-size:11px;font-family:'JetBrains Mono',monospace}
+.tag-g{background:#0d2a0d;color:#5ecf5e;border:1px solid #1e6020}
+.tag-a{background:#2a1e08;color:#dfa84a;border:1px solid #7a5820}
+.tag-r{background:#2a0d0d;color:#cf5e5e;border:1px solid #7a2020}
+.tag-b{background:#0d1e2a;color:#5ea8cf;border:1px solid #1e507a}
+.tag-n{background:var(--s2);color:var(--txt2);border:1px solid var(--bdr)}
+
+/* treatment list */
+.tlist{list-style:none;display:flex;flex-direction:column;gap:9px}
+.tlist li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--txt2);line-height:1.55}
+.tlist li::before{content:"→";color:var(--acc);flex-shrink:0;margin-top:1px}
+
+/* alt diagnoses */
+.alts{display:flex;flex-direction:column;gap:8px}
+.alt{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 14px;background:var(--s2);
+  border:1px solid var(--bdr);border-radius:9px;
+}
+.alt-name{font-size:13px;color:var(--txt);flex:1}
+.alt-track{width:120px;height:3px;background:var(--bdr);border-radius:2px}
+.alt-fill{height:100%;border-radius:2px;background:var(--txt3);transition:width .8s ease}
+.alt-pct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--txt3);min-width:36px;text-align:right}
+
+/* red flags */
+.flag-card{background:var(--s1);border:1px solid #3a1818;border-radius:var(--r);padding:20px 22px}
+.flag-card h3{color:#d07070;margin-bottom:13px;font-family:'Lora',serif;font-size:16px;font-weight:600}
+
+/* disclaimer */
+.disclaimer{
+  background:#0d0d1e;border:1px solid #1e1e3a;border-radius:10px;
+  padding:15px 17px;font-size:11.5px;color:#7777bb;line-height:1.7;
+}
+.disclaimer strong{color:#aaaadd}
+
+/* FOOTER */
+.footer{
+  background:var(--s1);border-top:1px solid var(--bdr);
+  padding:10px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  font-size:11px;color:var(--txt3);font-family:'JetBrains Mono',monospace;
+}
+.fdot{width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.fsep{color:var(--bdr2)}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-mark">🔬</div>
+    <div class="logo-text">
+      <div class="logo-name">Derm<span>AI</span> Pro</div>
+      <div class="logo-sub">Skin Disease Prediction System</div>
+    </div>
+  </div>
+  <div class="header-badges">
+    <div class="badge-pill" id="modelPill">
+      <div class="dot" id="modelDot"></div>
+      <span id="modelLabel">Initializing…</span>
+    </div>
+    <div class="ver">v3.0 · 23 Classes</div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ── LEFT PANEL ── -->
+  <div class="lp">
+
+    <!-- Upload -->
+    <div class="sec">
+      <div class="sec-lbl"><span>01</span> Image Upload</div>
+      <div class="dropzone" id="dz">
+        <input type="file" id="fileIn" accept="image/*">
+        <span class="dz-icon">🩺</span>
+        <div class="dz-title">Drop skin image here</div>
+        <div class="dz-sub">JPG · PNG · WEBP &nbsp;·&nbsp; Max 10 MB</div>
+      </div>
+      <div class="preview" id="preview">
+        <img class="prev-img" id="prevImg" src="" alt="">
+        <div class="prev-badge" id="prevInfo">—</div>
+        <button class="prev-rm" onclick="resetImg()">✕ Remove</button>
+      </div>
+    </div>
+
+    <!-- Patient Info -->
+    <div class="sec">
+      <div class="sec-lbl"><span>02</span> Patient Information</div>
+      <div class="fgrid">
+        <div class="fg">
+          <label>Age</label>
+          <input type="number" id="age" placeholder="e.g. 34" min="1" max="120">
+        </div>
+        <div class="fg">
+          <label>Gender</label>
+          <select id="gender">
+            <option value="">Select</option>
+            <option>Male</option><option>Female</option><option>Other</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Skin Type</label>
+          <select id="skinType">
+            <option value="">Select</option>
+            <option>Type I – Very Fair</option><option>Type II – Fair</option>
+            <option>Type III – Medium</option><option>Type IV – Olive</option>
+            <option>Type V – Brown</option><option>Type VI – Dark</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Duration</label>
+          <select id="dur">
+            <option value="">Select</option>
+            <option>&lt; 1 week</option><option>1–4 weeks</option>
+            <option>1–3 months</option><option>3–6 months</option><option>&gt; 6 months</option>
+          </select>
+        </div>
+        <div class="fg full">
+          <label>Affected Area</label>
+          <input type="text" id="area" placeholder="e.g. left forearm, neck, scalp">
+        </div>
+      </div>
+    </div>
+
+    <!-- Symptoms -->
+    <div class="sec">
+      <div class="sec-lbl"><span>03</span> Reported Symptoms</div>
+      <div class="syms" id="syms">
+        <span class="sym" onclick="tog(this)">Itching</span>
+        <span class="sym" onclick="tog(this)">Burning</span>
+        <span class="sym" onclick="tog(this)">Pain</span>
+        <span class="sym" onclick="tog(this)">Redness</span>
+        <span class="sym" onclick="tog(this)">Swelling</span>
+        <span class="sym" onclick="tog(this)">Dryness</span>
+        <span class="sym" onclick="tog(this)">Scaling</span>
+        <span class="sym" onclick="tog(this)">Blistering</span>
+        <span class="sym" onclick="tog(this)">Oozing</span>
+        <span class="sym" onclick="tog(this)">Crusting</span>
+        <span class="sym" onclick="tog(this)">Pigmentation</span>
+        <span class="sym" onclick="tog(this)">Hair Loss</span>
+        <span class="sym" onclick="tog(this)">Night Itch</span>
+        <span class="sym" onclick="tog(this)">Spreading</span>
+        <span class="sym" onclick="tog(this)">Pus/Discharge</span>
+        <span class="sym" onclick="tog(this)">Fever</span>
+      </div>
+      <div style="margin-top:13px">
+        <div class="fg">
+          <label>Additional Notes</label>
+          <textarea id="notes" placeholder="Other symptoms, medications, medical history, allergies…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button -->
+    <button class="analyze-btn" id="analyzeBtn" onclick="analyze()">
+      🔬 &nbsp;Analyze Skin Condition
+    </button>
+
+  </div><!-- /lp -->
+
+  <!-- ── RIGHT PANEL ── -->
+  <div class="rp" id="rp">
+
+    <!-- Empty -->
+    <div class="empty" id="empty">
+      <div class="empty-icon">🩺</div>
+      <div class="empty-title">Ready for Analysis</div>
+      <div class="empty-desc">
+        Upload a skin image and fill in the patient details, then click Analyze to receive
+        an AI-powered diagnostic assessment across 23 skin disease categories.
+      </div>
+      <div class="empty-chips">
+        <div class="empty-chip">🧠 Deep CNN Model</div>
+        <div class="empty-chip">📊 Confidence Scoring</div>
+        <div class="empty-chip">💊 Treatment Plans</div>
+        <div class="empty-chip">⚠️ Red Flag Alerts</div>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loading">
+      <div class="spin-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="27" fill="none" stroke="#0d2030" stroke-width="4"/>
+          <circle cx="32" cy="32" r="27" fill="none" stroke="#00d4ff" stroke-width="4"
+            stroke-dasharray="45 125" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="load-title">ANALYZING IMAGE…</div>
+      <div class="load-steps">
+        <div class="step act" id="st1"><div class="step-dot"></div>Pre-processing image data</div>
+        <div class="step" id="st2"><div class="step-dot"></div>Extracting visual features</div>
+        <div class="step" id="st3"><div class="step-dot"></div>Running classification model</div>
+        <div class="step" id="st4"><div class="step-dot"></div>Compiling diagnostic report</div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="results" id="results"></div>
+
+  </div><!-- /rp -->
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="fdot"></div>
+  <span>AI-Powered — No external APIs</span>
+  <span class="fsep">|</span>
+  <span>23 Skin Disease Classes</span>
+  <span class="fsep">|</span>
+  <span>For educational use only</span>
+  <span style="margin-left:auto">DermAI Pro v3.0</span>
+</footer>
+
+</div><!-- /app -->
+
+<script>
+/* ── state ── */
+let imgB64 = null, imgName = '';
+const API = window.location.origin;
+
+/* ── model status check ── */
+async function checkHealth() {
+  try {
+    const r = await fetch(`${API}/api/health`);
+    const d = await r.json();
+    if (d.status === 'ok') {
+      document.getElementById('modelDot').className = 'dot ready';
+      document.getElementById('modelLabel').textContent = `Model Ready · ${d.classes} Classes`;
+      document.getElementById('modelPill').className = 'badge-pill ready';
+    }
+  } catch(e) {
+    document.getElementById('modelDot').className = 'dot err';
+    document.getElementById('modelLabel').textContent = 'Server Offline';
+    document.getElementById('modelPill').className = 'badge-pill err';
+  }
+}
+checkHealth();
+
+/* ── drag/drop/upload ── */
+const dz = document.getElementById('dz');
+const fi = document.getElementById('fileIn');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+dz.addEventListener('drop', e => {
+  e.preventDefault(); dz.classList.remove('over');
+  const f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('image/')) processFile(f);
+});
+fi.addEventListener('change', e => { if (e.target.files[0]) processFile(e.target.files[0]); });
+
+function processFile(f) {
+  imgName = f.name;
+  const r = new FileReader();
+  r.onload = ev => {
+    imgB64 = ev.target.result.split(',')[1];
+    document.getElementById('prevImg').src = ev.target.result;
+    document.getElementById('prevInfo').textContent = `${f.name} · ${(f.size/1024).toFixed(0)} KB`;
+    dz.style.display = 'none';
+    const pv = document.getElementById('preview');
+    pv.classList.add('vis');
+  };
+  r.readAsDataURL(f);
+}
+
+function resetImg() {
+  imgB64 = null; fi.value = '';
+  document.getElementById('preview').classList.remove('vis');
+  dz.style.display = '';
+}
+
+function tog(el) { el.classList.toggle('on'); }
+
+function selectedSymptoms() {
+  return [...document.querySelectorAll('.sym.on')].map(e => e.textContent.trim());
+}
+
+/* ── UI states ── */
+function showEmpty()   { document.getElementById('empty').style.display=''; document.getElementById('loading').className='loading'; document.getElementById('results').className='results'; }
+function showLoading() { document.getElementById('empty').style.display='none'; document.getElementById('loading').className='loading act'; document.getElementById('results').className='results'; resetSteps(); }
+function showResults() { document.getElementById('empty').style.display='none'; document.getElementById('loading').className='loading'; document.getElementById('results').className='results act'; }
+
+function resetSteps() {
+  const texts = ['Pre-processing image data','Extracting visual features','Running classification model','Compiling diagnostic report'];
+  for (let i=1;i<=4;i++) {
+    const el = document.getElementById('st'+i);
+    el.className = i===1 ? 'step act' : 'step';
+    el.innerHTML = `<div class="step-dot"></div>${texts[i-1]}`;
+  }
+}
+function advanceStep(n) {
+  const texts = ['Pre-processing image data','Extracting visual features','Running classification model','Compiling diagnostic report'];
+  for (let i=1;i<=4;i++) {
+    const el = document.getElementById('st'+i);
+    if (i < n)       { el.className='step done'; el.innerHTML=`<div class="step-dot"></div>✓ ${texts[i-1]}`; }
+    else if (i === n){ el.className='step act'; }
+    else             { el.className='step'; el.innerHTML=`<div class="step-dot"></div>${texts[i-1]}`; }
+  }
+}
+
+/* ── ANALYZE ── */
+async function analyze() {
+  if (!imgB64) { alert('Please upload a skin image first.'); return; }
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true; btn.textContent = '⏳  Analyzing…';
+  showLoading();
+
+  const stepTimer = setInterval((() => {
+    let n = 1;
+    return () => { n++; if(n<=4) advanceStep(n); else clearInterval(stepTimer); };
+  })(), 700);
+
+  const payload = {
+    image_b64: imgB64,
+    age: document.getElementById('age').value,
+    gender: document.getElementById('gender').value,
+    skin_type: document.getElementById('skinType').value,
+    duration: document.getElementById('dur').value,
+    area: document.getElementById('area').value,
+    symptoms: selectedSymptoms(),
+    notes: document.getElementById('notes').value,
+  };
+
+  try {
+    const res = await fetch(`${API}/api/predict`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    clearInterval(stepTimer);
+    advanceStep(4);
+    await new Promise(r => setTimeout(r, 400));
+    if (data.success) renderResults(data.result);
+    else throw new Error(data.error || 'Prediction failed');
+  } catch(err) {
+    clearInterval(stepTimer);
+    showResults();
+    document.getElementById('results').innerHTML = `
+      <div class="card"><h3 style="color:var(--danger)">Analysis Error</h3>
+      <p class="desc">${err.message}</p>
+      <p class="desc" style="margin-top:8px;font-size:12px">
+        Make sure the Flask server is running: <code style="color:var(--acc)">python3 app.py</code>
+      </p></div>`;
+  }
+  btn.disabled = false; btn.textContent = '🔬  Analyze Skin Condition';
+}
+
+/* ── RENDER ── */
+function sevOrb(sev) {
+  if (sev==='severe')   return ['sev-hi','▲'];
+  if (sev==='moderate') return ['sev-med','◆'];
+  return ['sev-low','●'];
+}
+function urgBadge(u) {
+  if (u==='urgent') return `<span class="tag tag-r">Urgent</span>`;
+  if (u==='soon')   return `<span class="tag tag-a">See doctor soon</span>`;
+  return `<span class="tag tag-g">Routine follow-up</span>`;
+}
+function sevBadge(s) {
+  const m = {severe:'tag-r',moderate:'tag-a',mild:'tag-g'};
+  return `<span class="tag ${m[s]||'tag-n'}" style="text-transform:capitalize">${s}</span>`;
+}
+
+function renderResults(r) {
+  const [orbCls, orbIcon] = sevOrb(r.severity);
+  const ps = r.patientSummary || {};
+
+  const altBars = (r.alternativeDiagnoses||[]).map(a => `
+    <div class="alt">
+      <div class="alt-name">${a.name}</div>
+      <div class="alt-track"><div class="alt-fill" style="width:${Math.min(a.probability,100)}%"></div></div>
+      <div class="alt-pct">${a.probability}%</div>
+    </div>`).join('');
+
+  const causes = (r.causes||[]).map(c => `<span class="tag tag-n">${c}</span>`).join('');
+  const meds   = (r.medications||[]).map(m => `<span class="tag tag-b">${m}</span>`).join('');
+  const life   = (r.lifestyle||[]).map(l => `<span class="tag tag-g">${l}</span>`).join('');
+  const treats = (r.treatments||[]).map(t => `<li>${t}</li>`).join('');
+  const redF   = (r.redFlags||[]).map(f => `<li>${f}</li>`).join('');
+
+  const html = `
+    <!-- Header card -->
+    <div class="rh">
+      <div class="sev-orb ${orbCls}">${orbIcon}</div>
+      <div class="rh-main">
+        <div class="rh-name">${r.primaryDiagnosis}</div>
+        <div class="rh-sci">${r.icdCode||''}</div>
+        <div class="conf-row">
+          <div class="conf-lbl">CONFIDENCE</div>
+          <div class="conf-track"><div class="conf-fill" id="confFill"></div></div>
+          <div class="conf-val">${r.confidence}%</div>
+        </div>
+      </div>
+      <div class="rh-badges">
+        ${sevBadge(r.severity)}
+        ${urgBadge(r.urgency)}
+      </div>
+    </div>
+
+    <!-- Patient + Specialist -->
+    <div class="card">
+      <div class="card-grid">
+        <div class="mini-card">
+          <div class="mini-lbl">Patient Summary</div>
+          <div class="mini-val">
+            ${ps.age ? ps.age+' yrs' : '—'} &nbsp;·&nbsp; ${ps.gender||'—'}<br>
+            ${ps.area ? 'Area: '+ps.area : 'Area not specified'}<br>
+            ${ps.duration ? 'Duration: '+ps.duration : ''}<br>
+            <span style="color:${r.contagious?'var(--danger)':'var(--ok)'}">
+              ${r.contagious ? '⚠ Contagious condition' : '✓ Not contagious'}
+            </span>
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-lbl">Specialist Required</div>
+          <div class="mini-val">${r.specialistNeeded||'Dermatologist'}</div>
+          <div style="font-size:11.5px;color:var(--txt3);margin-top:7px">${r.affectedPopulation||''}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="card">
+      <h3>Clinical Description</h3>
+      <p class="desc">${r.description}</p>
+    </div>
+
+    <!-- Causes -->
+    <div class="card">
+      <h3>Known Causes</h3>
+      <div class="tag-row">${causes}</div>
+    </div>
+
+    <!-- Treatments -->
+    <div class="card">
+      <h3>Recommended Treatments</h3>
+      <ul class="tlist">${treats}</ul>
+    </div>
+
+    <!-- Meds + Lifestyle -->
+    <div class="card">
+      <div class="card-grid">
+        <div class="mini-card">
+          <div class="mini-lbl">Medications</div>
+          <div class="tag-row" style="margin-top:6px">${meds}</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-lbl">Lifestyle Advice</div>
+          <div class="tag-row" style="margin-top:6px">${life}</div>
+        </div>
+      </div>
+    </div>
+
+    ${redF ? `
+    <div class="flag-card">
+      <h3>⚠ Red Flag Symptoms — Seek Immediate Care If:</h3>
+      <ul class="tlist">${redF}</ul>
+    </div>` : ''}
+
+    <!-- Alternatives -->
+    <div class="card">
+      <h3>Alternative Diagnoses to Consider</h3>
+      <div class="alts">${altBars}</div>
+    </div>
+
+    <!-- Prognosis -->
+    <div class="card">
+      <h3>Prognosis</h3>
+      <p class="desc">${r.prognosis}</p>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <strong>⚕ Medical Disclaimer:</strong>
+      This AI analysis is for <strong>educational and informational purposes only</strong>.
+      It does not constitute medical advice, diagnosis, or treatment. Always consult a qualified
+      dermatologist or healthcare professional. Do not delay or disregard medical care based on this assessment.
+    </div>
+  `;
+
+  showResults();
+  document.getElementById('results').innerHTML = html;
+  // Animate confidence bar
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      const f = document.getElementById('confFill');
+      if (f) f.style.width = r.confidence + '%';
+    }, 100);
+  });
+}
+</script>
+</body>
+</html>
